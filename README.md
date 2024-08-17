@@ -1,12 +1,12 @@
 # ProjectPulse
 
-ProjectPulse is a project management dashboard built with Next.js, Chakra UI, and Recharts. It provides an interactive and visually appealing interface for managing projects, tracking tasks, and analyzing key performance metrics.
+ProjectPulse is a project management dashboard built with Next.js, Chakra UI, and chart.js. It provides an interactive and visually appealing interface for managing projects, tracking tasks, and analyzing key performance metrics.
 
 ## Features
 
 - **Interactive Dashboard**: View project data, user engagement metrics, and system performance at a glance.
 - **Responsive Design**: Built with Chakra UI, the dashboard is fully responsive and looks great on all devices.
-- **Data Visualization**: Visualize data using Recharts, making it easy to understand trends and insights.
+- **Data Visualization**: Visualize data using chart.js, making it easy to understand trends and insights.
 - **State Management**: Utilizes React Context for efficient and scalable state management.
 - **Customizable UI**: Easily extend and customize the dashboard with Chakra UI components.
 
@@ -14,7 +14,7 @@ ProjectPulse is a project management dashboard built with Next.js, Chakra UI, an
 
 - **Next.js**: React framework for server-side rendering, routing, and API handling.
 - **Chakra UI**: A simple, modular, and accessible component library for React.
-- **Recharts**: A composable charting library built on React components.
+- **Chart.js**: A composable charting library built on React components.
 - **React Context**: Used for managing the global state of the application.
 
 ## Installation
