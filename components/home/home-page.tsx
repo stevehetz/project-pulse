@@ -59,7 +59,7 @@ export default function HomePage() {
                                 justify={{ base: 'center', md: 'flex-start' }}>
                                 <Button
                                     as={NextLink}
-                                    href='/dashboard'
+                                    href='/demo/dashboard'
                                     colorScheme='teal'
                                     size='lg'>
                                     Demo
