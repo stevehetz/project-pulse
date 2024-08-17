@@ -9,10 +9,8 @@ import {
     Image,
     SimpleGrid,
     Stack,
-    StackDirection,
     Text,
-    VStack,
-    useBreakpointValue
+    VStack
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { FaCheckCircle } from 'react-icons/fa';
