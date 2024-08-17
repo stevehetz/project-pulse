@@ -99,7 +99,7 @@ const Dashboard = () => {
 };
 
 // Reusable NavItem Component
-const NavItem = ({ icon, label }) => {
+const NavItem = ({ icon, label }: { icon: any, label: string }) => {
   return (
     <HStack spacing="4">
       <Icon as={icon} boxSize="6" />
@@ -109,7 +109,7 @@ const NavItem = ({ icon, label }) => {
 };
 
 // Reusable Stat Card Component
-const StatCard = ({ title, value }) => {
+const StatCard = ({ title, value }: { title: string, value: string }) => {
   return (
     <Box
       bg="white"

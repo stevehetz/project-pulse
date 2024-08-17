@@ -47,7 +47,7 @@ export default function HomePage() {
           <Heading as="h3" size="lg" mb={8}>
             What Our Users Say
           </Heading>
-          <Text fontSize={'xl'}>"ProjectPulse has transformed how we manage our projects. The features are intuitive and help us stay on track."</Text>
+          <Text fontSize={'xl'}>&quot;ProjectPulse has transformed how we manage our projects. The features are intuitive and help us stay on track.&quot;</Text>
           <Text fontWeight={'bold'} mt={4}>– John Doe, CEO of Acme Corp</Text>
         </Container>
       </Box>
@@ -89,7 +89,7 @@ export default function HomePage() {
 }
 
 // Feature Component
-function Feature({ title, description }) {
+function Feature({ title, description }: { title: string, description: string }) {
   return (
     <Stack spacing={4}>
       <Icon as={FaCheckCircle} w={10} h={10} color={'teal.400'} />
@@ -100,7 +100,7 @@ function Feature({ title, description }) {
 }
 
 // PricingCard Component
-function PricingCard({ title, price, features }) {
+function PricingCard({ title, price, features }: { title: string, price: string, features: string[] }) {
   return (
     <Box borderWidth={1} borderRadius={'lg'} overflow={'hidden'} p={6}>
       <Heading as="h4" size="md" mb={4}>{title}</Heading>
