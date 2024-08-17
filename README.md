@@ -1,36 +1,40 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# ProjectPulse
 
-## Getting Started
+ProjectPulse is a project management dashboard built with Next.js, Chakra UI, and Recharts. It provides an interactive and visually appealing interface for managing projects, tracking tasks, and analyzing key performance metrics.
 
-First, run the development server:
+## Features
 
+- **Interactive Dashboard**: View project data, user engagement metrics, and system performance at a glance.
+- **Responsive Design**: Built with Chakra UI, the dashboard is fully responsive and looks great on all devices.
+- **Data Visualization**: Visualize data using Recharts, making it easy to understand trends and insights.
+- **State Management**: Utilizes React Context for efficient and scalable state management.
+- **Customizable UI**: Easily extend and customize the dashboard with Chakra UI components.
+
+## Tech Stack
+
+- **Next.js**: React framework for server-side rendering, routing, and API handling.
+- **Chakra UI**: A simple, modular, and accessible component library for React.
+- **Recharts**: A composable charting library built on React components.
+- **React Context**: Used for managing the global state of the application.
+
+## Installation
+
+Follow these steps to get the project up and running on your local machine:  
+
+1. Clone the repository:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/yourusername/projectpulse.git
+cd projectpulse
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2.	Install dependencies:
+```bash
+   npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. 	Run dev server
+```bash
+   npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Open http://localhost:3000 in your browser to view the application.
