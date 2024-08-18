@@ -25,7 +25,7 @@ export const Nav = ({ isOpen, onClose }) => {
     const navItems = [
         { href: '/demo/dashboard', label: 'Dashboard', icon: FaTachometerAlt },
         { href: '/demo/kanban', label: 'Kanban', icon: FaTasks },
-        { href: '/demo/timetracker', label: 'Time Tracker', icon: FaClock }
+        { href: '/demo/gantt-chart', label: 'Gantt Chart', icon: FaClock }
     ];
 
     const NavContent = () => (

@@ -9,5 +9,13 @@
     "tabWidth": 4,
     "useTabs": false,
     "singleAttributePerLine": true,
-    "bracketSameLine": true
+    "bracketSameLine": true,
+    "overrides": [
+        {
+            "files": "*.css",
+            "options": {
+                "singleQuote": false
+            }
+        }
+    ]
 }

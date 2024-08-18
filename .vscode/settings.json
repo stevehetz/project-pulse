@@ -12,6 +12,9 @@
     "[js]": {
         "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
     },
+    "[css]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
     "[ts]": {
         "editor.defaultFormatter": "rvest.vs-code-prettier-eslint"
     },

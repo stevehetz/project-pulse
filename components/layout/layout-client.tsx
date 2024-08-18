@@ -28,7 +28,6 @@ export default function LayoutClient({
                 <Box
                     ml={{ base: 0, lg: '250px' }}
                     width='full'
-                    padding='4'
                     overflowY='auto'
                     height='100%'>
                     {children}
