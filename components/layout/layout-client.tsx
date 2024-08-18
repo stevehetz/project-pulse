@@ -15,27 +15,25 @@ export default function LayoutClient({
     const isHomePage = pathname === '/';
     const { isOpen, onOpen, onClose } = useDisclosure();
 
-    return (
+    return isHomePage ? (
+        children
+    ) : (
         <>
             <Header onToggle={onOpen} />
             <Nav
                 isOpen={isOpen}
                 onClose={onClose}
             />
-            {isHomePage ? (
-                children
-            ) : (
-                <Flex height='calc(100vh - 64px)'>
-                    <Box
-                        ml={{ base: 0, lg: '250px' }}
-                        width='full'
-                        padding='4'
-                        overflowY='auto'
-                        height='100%'>
-                        {children}
-                    </Box>
-                </Flex>
-            )}
+            <Flex height='calc(100vh - 64px)'>
+                <Box
+                    ml={{ base: 0, lg: '250px' }}
+                    width='full'
+                    padding='4'
+                    overflowY='auto'
+                    height='100%'>
+                    {children}
+                </Box>
+            </Flex>
         </>
     );
 }

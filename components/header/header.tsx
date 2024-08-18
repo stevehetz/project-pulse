@@ -1,11 +1,17 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { Flex, HStack, Text, IconButton, useBreakpointValue } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import { FaProjectDiagram, FaSignInAlt, FaBars } from 'react-icons/fa';
 
 export const Header = ({ onToggle }) => {
     const isMobile = useBreakpointValue({ base: true, lg: false });
+    const [mounted, setMounted] = useState(false);
+
+    useEffect(() => {
+        setMounted(true);
+    }, []);
 
     return (
         <Flex
@@ -22,7 +28,7 @@ export const Header = ({ onToggle }) => {
             boxShadow='sm' // Add a subtle shadow to the header
         >
             <HStack spacing={2}>
-                {isMobile && (
+                {mounted && isMobile && (
                     <IconButton
                         aria-label='Toggle Navigation'
                         icon={<FaBars />}
@@ -31,36 +37,37 @@ export const Header = ({ onToggle }) => {
                         size='lg'
                     />
                 )}
-                <NextLink
-                    href='/'
-                    passHref>
-                    <Flex alignItems='center'>
-                        <HStack
-                            alignItems='center'
-                            spacing={2}>
-                            <FaProjectDiagram size={24} /> {/* ProjectPulse Icon */}
-                            <Text
-                                marginLeft='8px'
-                                fontWeight='bold'
-                                fontSize='25px'>
-                                ProjectPulse
-                            </Text>
-                        </HStack>
-                    </Flex>
-                </NextLink>
+
+                <Flex alignItems='center'>
+                    <HStack
+                        alignItems='center'
+                        spacing={2}>
+                        <FaProjectDiagram size={24} /> {/* ProjectPulse Icon */}
+                        <Text
+                            marginLeft='8px'
+                            fontWeight='bold'
+                            fontSize='25px'>
+                            ProjectPulse
+                        </Text>
+                    </HStack>
+                </Flex>
             </HStack>
             <Flex
                 alignItems='center'
                 justifyContent='flex-end'
                 padding='1rem'>
-                <HStack
-                    spacing={4}
-                    cursor={'pointer'}
-                    display='flex'
-                    alignItems='center'>
-                    <FaSignInAlt size={20} />
-                    {!isMobile && <Text>Sign Out</Text>}
-                </HStack>
+                <NextLink
+                    href='/'
+                    passHref>
+                    <HStack
+                        spacing={4}
+                        cursor={'pointer'}
+                        display='flex'
+                        alignItems='center'>
+                        <FaSignInAlt size={20} />
+                        {!isMobile && <Text>Sign Out</Text>}
+                    </HStack>
+                </NextLink>
             </Flex>
         </Flex>
     );
