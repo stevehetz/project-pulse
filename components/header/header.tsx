@@ -1,0 +1,67 @@
+'use client';
+
+import { Flex, HStack, Text, IconButton, useBreakpointValue } from '@chakra-ui/react';
+import NextLink from 'next/link';
+import { FaProjectDiagram, FaSignInAlt, FaBars } from 'react-icons/fa';
+
+export const Header = ({ onToggle }) => {
+    const isMobile = useBreakpointValue({ base: true, lg: false });
+
+    return (
+        <Flex
+            alignItems='center'
+            justifyContent='space-between'
+            as='header'
+            bg='#fff'
+            color='#4b79d7'
+            borderBottom={1}
+            borderStyle='solid'
+            borderColor='gray.200'
+            px='4'
+            py='1'
+            boxShadow='sm' // Add a subtle shadow to the header
+        >
+            <HStack spacing={2}>
+                {isMobile && (
+                    <IconButton
+                        aria-label='Toggle Navigation'
+                        icon={<FaBars />}
+                        onClick={onToggle}
+                        variant='ghost'
+                        size='lg'
+                    />
+                )}
+                <NextLink
+                    href='/'
+                    passHref>
+                    <Flex alignItems='center'>
+                        <HStack
+                            alignItems='center'
+                            spacing={2}>
+                            <FaProjectDiagram size={24} /> {/* ProjectPulse Icon */}
+                            <Text
+                                marginLeft='8px'
+                                fontWeight='bold'
+                                fontSize='25px'>
+                                ProjectPulse
+                            </Text>
+                        </HStack>
+                    </Flex>
+                </NextLink>
+            </HStack>
+            <Flex
+                alignItems='center'
+                justifyContent='flex-end'
+                padding='1rem'>
+                <HStack
+                    spacing={4}
+                    cursor={'pointer'}
+                    display='flex'
+                    alignItems='center'>
+                    <FaSignInAlt size={20} />
+                    {!isMobile && <Text>Sign Out</Text>}
+                </HStack>
+            </Flex>
+        </Flex>
+    );
+};

@@ -153,33 +153,11 @@ export const DashboardPage = () => {
         <Flex
             direction='column'
             height='100vh'>
-            {/* Header */}
-            <Flex
-                as='header'
-                align='center'
-                justify='space-between'
-                padding='4'
-                bg='gray.800'
-                color='white'>
-                <Text
-                    fontSize='xl'
-                    fontWeight='bold'>
-                    ProjectPulse Dashboard
-                </Text>
-                <IconButton
-                    aria-label='Menu'
-                    icon={<FiMenu />}
-                    variant='ghost'
-                    color='white'
-                />
-            </Flex>
-
             <Flex flex='1'>
                 {/* Main Content */}
                 <Box
                     flex='1'
-                    p='6'
-                    bg='gray.100'>
+                    p='6'>
                     {/* Metric Cards */}
                     <SimpleGrid
                         columns={{ base: 1, md: 3 }}
