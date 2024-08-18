@@ -39,8 +39,10 @@ ChartJS.register(
     Legend
 );
 
+import { IconType } from 'react-icons';
 import { FiMenu } from 'react-icons/fi';
 import { IRevenue, ISystemPerformance, IUserEngagement, mockData } from '../../data/mockData'; // Importing the mock data
+import { color } from 'chart.js/helpers';
 const { userEngagement, systemPerformance, revenue } = mockData;
 
 interface DashboardDataState {
@@ -87,16 +89,14 @@ export const DashboardPage = () => {
         labels: data.revenue.map(item => item.month),
         datasets: [
             {
-                label: 'Monthly Recurring Revenue (MRR)',
-                data: data.revenue.map(item => item.MRR),
-                borderColor: '#ff7300',
-                fill: false
-            },
-            {
                 label: 'Average Revenue Per User (ARPU)',
                 data: data.revenue.map(item => item.ARPU),
-                borderColor: '#8884d8',
-                fill: false
+                backgroundColor: '#8884d8'
+            },
+            {
+                label: 'Monthly Recurring Revenue (MRR)',
+                data: data.revenue.map(item => item.MRR),
+                backgroundColor: '#92DBF1'
             }
         ]
     };
@@ -107,7 +107,7 @@ export const DashboardPage = () => {
             {
                 label: 'Churn Rate',
                 data: data.revenue.map(item => item.churnRate),
-                backgroundColor: '#f44e3b',
+                backgroundColor: '#92F1C8',
                 fill: true
             }
         ]
@@ -119,7 +119,7 @@ export const DashboardPage = () => {
             {
                 label: 'Server Uptime (%)',
                 data: data.systemPerformance.map(item => item.uptime),
-                borderColor: '#4bc0c0',
+                borderColor: '#E9B060',
                 fill: false
             }
         ]
@@ -179,7 +179,7 @@ export const DashboardPage = () => {
                 <Box
                     flex='1'
                     p='6'
-                    bg='gray.200'>
+                    bg='gray.100'>
                     {/* Metric Cards */}
                     <SimpleGrid
                         columns={{ base: 1, md: 3 }}
@@ -190,6 +190,8 @@ export const DashboardPage = () => {
                                 key={index}
                                 title={data.title}
                                 value={data.value}
+                                icon={data.icon}
+                                color={data.color}
                             />
                         ))}
                     </SimpleGrid>
@@ -220,7 +222,19 @@ export const DashboardPage = () => {
                                 mb={4}>
                                 Revenue Metrics
                             </Heading>
-                            <Line data={revenueChartData} />
+                            <Bar
+                                data={revenueChartData}
+                                options={{
+                                    scales: {
+                                        x: {
+                                            stacked: true
+                                        },
+                                        y: {
+                                            stacked: true
+                                        }
+                                    }
+                                }}
+                            />
                         </Box>
                         <Box
                             borderWidth='1px'
@@ -242,9 +256,9 @@ export const DashboardPage = () => {
                             <Heading
                                 size='md'
                                 mb={4}>
-                                Server Uptime
+                                Response Times
                             </Heading>
-                            <Line data={systemUptimeChartData} />
+                            <Line data={responseTimesChartData} />
                         </Box>
                         <Box
                             borderWidth='1px'
@@ -254,10 +268,11 @@ export const DashboardPage = () => {
                             <Heading
                                 size='md'
                                 mb={4}>
-                                Response Times
+                                Server Uptime
                             </Heading>
-                            <Line data={responseTimesChartData} />
+                            <Line data={systemUptimeChartData} />
                         </Box>
+
                         <Box
                             borderWidth='1px'
                             borderRadius='lg'
@@ -302,17 +317,38 @@ export const DashboardPage = () => {
     );
 };
 
-const StatCard = ({ title, value }: { title: string; value: string }) => {
+const StatCard = ({
+    title,
+    value,
+    icon,
+    color
+}: {
+    title: string;
+    value: string;
+    icon: IconType;
+    color?: string;
+}) => {
     return (
         <Box
             bg='white'
             p='6'
             rounded='md'
             boxShadow='sm'>
-            <Stat>
-                <StatLabel>{title}</StatLabel>
-                <StatNumber>{value}</StatNumber>
-            </Stat>
+            <Flex align='center'>
+                <Box
+                    as={icon}
+                    size='44px'
+                    color='white'
+                    bg={color || 'gray.800'}
+                    borderRadius='full'
+                    p='2'
+                    mr='4'
+                />
+                <Stat>
+                    <StatLabel>{title}</StatLabel>
+                    <StatNumber>{value}</StatNumber>
+                </Stat>
+            </Flex>
         </Box>
     );
 };

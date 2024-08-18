@@ -1,5 +1,7 @@
 // data/mockData.js
 
+import { FiDollarSign, FiUserPlus, FiUsers } from 'react-icons/fi';
+
 export interface IUserEngagement {
     month: string;
     activeUsers: number;
@@ -45,7 +47,7 @@ export interface ISystemPerformance {
 }
 
 export interface IMockData {
-    metrics: { title: string; value: string }[];
+    metrics: { title: string; value: string; icon: any; color: string }[];
     userEngagement: IUserEngagement[];
     revenue: IRevenue[];
     projectUsage: IProjectUsage[];
@@ -55,9 +57,9 @@ export interface IMockData {
 
 export const mockData: IMockData = {
     metrics: [
-        { title: 'Active Users', value: '5,238' },
-        { title: 'New Signups', value: '1,210' },
-        { title: 'Monthly Revenue', value: '$9,245.23' }
+        { title: 'Active Users', value: '5,238', icon: FiUsers, color: '#4e699f' },
+        { title: 'New Signups', value: '1,210', icon: FiUserPlus, color: '#d75151' },
+        { title: 'Monthly Revenue', value: '$9,245.23', icon: FiDollarSign, color: '#51d791' }
     ],
     userEngagement: [
         {
