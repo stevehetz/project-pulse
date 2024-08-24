@@ -1,16 +1,6 @@
 'use client';
 
-import {
-    Box,
-    Flex,
-    Heading,
-    IconButton,
-    SimpleGrid,
-    Stat,
-    StatLabel,
-    StatNumber,
-    Text
-} from '@chakra-ui/react';
+import { Box, Flex, Heading, SimpleGrid, Stat, StatLabel, StatNumber } from '@chakra-ui/react';
 import {
     ArcElement,
     BarElement,
@@ -40,10 +30,7 @@ ChartJS.register(
 );
 
 import { IconType } from 'react-icons';
-import { FiMenu } from 'react-icons/fi';
-import { IRevenue, ISystemPerformance, IUserEngagement, mockData } from '../../data/mockData'; // Importing the mock data
-import { color } from 'chart.js/helpers';
-const { userEngagement, systemPerformance, revenue } = mockData;
+import { IRevenue, ISystemPerformance, IUserEngagement } from './types';
 
 interface DashboardDataState {
     userEngagement: IUserEngagement[];
@@ -51,7 +38,7 @@ interface DashboardDataState {
     revenue: IRevenue[];
 }
 
-export const DashboardPage = () => {
+export const DashboardPage = ({ metrics, userEngagement, systemPerformance, revenue }: any) => {
     const [data, setData] = useState<DashboardDataState>({
         userEngagement: [],
         systemPerformance: [],
@@ -59,13 +46,12 @@ export const DashboardPage = () => {
     });
 
     useEffect(() => {
-        // Simulate fetching the data
         setData({
             userEngagement,
             systemPerformance,
             revenue
         });
-    }, []);
+    }, [userEngagement, systemPerformance, revenue]);
 
     const userEngagementChartData = {
         labels: data.userEngagement.map(item => item.month),
@@ -130,19 +116,19 @@ export const DashboardPage = () => {
         datasets: [
             {
                 label: 'Average Response Time (ms)',
-                data: data.systemPerformance.map(item => item.responseTime.average),
+                data: data.systemPerformance.map(item => item.averageTime),
                 borderColor: '#36a2eb',
                 fill: false
             },
             {
                 label: 'Max Response Time (ms)',
-                data: data.systemPerformance.map(item => item.responseTime.max),
+                data: data.systemPerformance.map(item => item.maxTime),
                 borderColor: '#ff6384',
                 fill: false
             },
             {
                 label: 'Min Response Time (ms)',
-                data: data.systemPerformance.map(item => item.responseTime.min),
+                data: data.systemPerformance.map(item => item.minTime),
                 borderColor: '#ffcd56',
                 fill: false
             }
@@ -163,7 +149,7 @@ export const DashboardPage = () => {
                         columns={{ base: 1, md: 3 }}
                         spacing='6'
                         mb='6'>
-                        {mockData.metrics.map((data, index) => (
+                        {metrics.map((data, index) => (
                             <StatCard
                                 key={index}
                                 title={data.title}

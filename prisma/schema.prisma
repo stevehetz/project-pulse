@@ -1,0 +1,112 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Metric {
+    id    Int    @id @default(autoincrement())
+    title String
+    value String
+    icon  String
+    color String
+}
+
+model UserEngagement {
+    id            Int             @id @default(autoincrement())
+    month         String
+    activeUsers   Int
+    newSignups    Int
+    DAU           Int
+    MAU           Int
+    retentionRate RetentionRate[]
+}
+
+model RetentionRate {
+    id               Int            @id @default(autoincrement())
+    cohort           String
+    retention        Int[]
+    userEngagement   UserEngagement @relation(fields: [userEngagementId], references: [id])
+    userEngagementId Int
+}
+
+model Revenue {
+    id        Int    @id @default(autoincrement())
+    month     String
+    MRR       Float
+    ARPU      Float
+    churnRate Float
+}
+
+model ProjectUsage {
+    id      Int    @id @default(autoincrement())
+    feature String
+    usage   Int
+}
+
+model SystemPerformance {
+    id             Int    @id @default(autoincrement())
+    day            String
+    uptime         Float
+    averageTime    Int
+    maxTime        Int
+    minTime        Int
+    apiSuccessRate Float
+    error500       Float
+    error404       Float
+}
+
+model CohortAnalysisData {
+    id        Int    @id @default(autoincrement())
+    cohort    String
+    retention Int[]
+}
+
+model KanbanTask {
+    id          Int            @id @default(autoincrement())
+    content     String
+    priority    KanbanPriority
+    comments    Int
+    attachments Int
+    column      KanbanColumn   @relation(fields: [columnId], references: [id])
+    columnId    Int
+
+    assignedUsers KanbanTaskAssignedUser[]
+}
+
+model User {
+    id    Int                      @id @default(autoincrement())
+    name  String
+    tasks KanbanTaskAssignedUser[]
+}
+
+model KanbanTaskAssignedUser {
+    taskId Int
+    userId Int
+    task   KanbanTask @relation(fields: [taskId], references: [id], onDelete: Cascade)
+    user   User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@id([taskId, userId])
+}
+
+model KanbanColumn {
+    id    Int          @id @default(autoincrement())
+    title String
+    color String
+    tasks KanbanTask[]
+}
+
+enum KanbanPriority {
+    High
+    Medium
+    Low
+}

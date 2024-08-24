@@ -2,60 +2,7 @@
 
 import { FiDollarSign, FiUserPlus, FiUsers } from 'react-icons/fi';
 
-export interface IUserEngagement {
-    month: string;
-    activeUsers: number;
-    newSignups: number;
-    DAU: number;
-    MAU: number;
-    retentionRate: {
-        cohort: string;
-        retention: number[];
-    };
-}
-
-export interface IRevenue {
-    month: string;
-    MRR: number;
-    ARPU: number;
-    churnRate: number;
-}
-
-export interface IProjectUsage {
-    feature: string;
-    usage: number;
-}
-
-export interface ICohortAnalysisData {
-    cohort: string;
-    retention: number[];
-}
-
-export interface ISystemPerformance {
-    day: string;
-    uptime: number;
-    responseTime: {
-        average: number;
-        max: number;
-        min: number;
-    };
-    apiSuccessRate: number;
-    errorRates: {
-        error500: number;
-        error404: number;
-    };
-}
-
-export interface IMockData {
-    metrics: { title: string; value: string; icon: any; color: string }[];
-    userEngagement: IUserEngagement[];
-    revenue: IRevenue[];
-    projectUsage: IProjectUsage[];
-    systemPerformance: ISystemPerformance[];
-    cohortAnalysisData: ICohortAnalysisData[];
-}
-
-export const mockData: IMockData = {
+export const mockData: any = {
     metrics: [
         { title: 'Active Users', value: '5,238', icon: FiUsers, color: '#4e699f' },
         { title: 'New Signups', value: '1,210', icon: FiUserPlus, color: '#d75151' },
