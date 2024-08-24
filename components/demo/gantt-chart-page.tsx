@@ -174,7 +174,7 @@ export const GanttChartPage = () => {
     return (
         <Box
             p={8}
-            minH='100vh'>
+            minW={1000}>
             <Chart
                 chartType='Gantt'
                 width='100%'

@@ -188,6 +188,7 @@ export const KanbanPage = () => {
                     ref={provided.innerRef}
                     bg='gray.50'
                     p={4}
+                    mx={4}
                     borderRadius='md'
                     w='300px'
                     minH='500px'
@@ -234,7 +235,8 @@ export const KanbanPage = () => {
         <DragDropContext onDragEnd={onDragEnd}>
             <Box
                 p={8}
-                minH='100vh'>
+                minH='100vh'
+                minW={1000}>
                 <Flex justifyContent='space-between'>
                     {renderColumn('backlog', tasks.backlog, 'Backlog', '#424242')}
                     {renderColumn('inProgress', tasks.inProgress, 'In Progress', '#7559B3')}

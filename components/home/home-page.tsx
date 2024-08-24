@@ -16,10 +16,12 @@ import NextLink from 'next/link';
 import { FaCheckCircle } from 'react-icons/fa';
 
 export default function HomePage() {
-    const bgColor = 'gray.50'; // Light mode as default or 'gray.800' for dark mode
+    const bgColor = 'gray.50';
 
     return (
-        <Box>
+        <Box
+            overflow='auto'
+            height='100%'>
             {/* Hero Section */}
             <Box
                 bg={bgColor}
