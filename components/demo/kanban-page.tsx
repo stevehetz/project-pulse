@@ -59,6 +59,7 @@ export const KanbanPage = ({ columns }) => {
             borderRadius='md'
             boxShadow='sm'
             mb={4}
+            border='1px solid'
             borderLeft='6px solid'
             borderColor={
                 task.priority === 'High' ? 'red.500' : task.priority === 'Medium' ? 'yellow.500' : 'green.500'
@@ -97,7 +98,7 @@ export const KanbanPage = ({ columns }) => {
                 <VStack
                     {...provided.droppableProps}
                     ref={provided.innerRef}
-                    bg='#f0eff4'
+                    bg='#fff'
                     p={4}
                     mx={4}
                     borderRadius='md'
