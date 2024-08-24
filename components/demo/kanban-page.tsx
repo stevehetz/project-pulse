@@ -1,20 +1,8 @@
 'use client';
-import React, { useState } from 'react';
-import {
-    Box,
-    Heading,
-    VStack,
-    Text,
-    Flex,
-    Badge,
-    HStack,
-    Avatar,
-    IconButton,
-    Spacer,
-    Button
-} from '@chakra-ui/react';
-import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
-import { FaPlus, FaComments, FaPaperclip, FaUserCircle } from 'react-icons/fa';
+import { Badge, Box, Button, Flex, Heading, HStack, Text, VStack } from '@chakra-ui/react';
+import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
+import { useState } from 'react';
+import { FaComments, FaPaperclip, FaPlus } from 'react-icons/fa';
 
 const initialTasks = {
     backlog: [
