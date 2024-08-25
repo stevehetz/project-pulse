@@ -16,7 +16,7 @@ import NextLink from 'next/link';
 import { FaCheckCircle } from 'react-icons/fa';
 
 export default function HomePage() {
-    const bgColor = 'gray.50';
+    const bgColor = '#fff';
 
     return (
         <Box
