@@ -12,6 +12,7 @@ import {
     Text,
     VStack
 } from '@chakra-ui/react';
+import Link from 'next/link';
 import NextLink from 'next/link';
 import { FaCheckCircle } from 'react-icons/fa';
 
@@ -66,11 +67,11 @@ export default function HomePage() {
                                     size='lg'>
                                     Demo
                                 </Button>
-                                <Button
+                                {/* <Button
                                     variant='outline'
                                     size='lg'>
                                     Sign Up
-                                </Button>
+                                </Button> */}
                             </Stack>
                         </VStack>
                     </Stack>
@@ -191,14 +192,16 @@ export default function HomePage() {
                         as='h3'
                         size='lg'
                         color={'white'}>
-                        Start Your Free Trial Today!
+                        Contact our Sales Team to Learn More!
                     </Heading>
-                    <Button
-                        colorScheme='gray'
-                        size='lg'
-                        mt={4}>
-                        Sign Up Now
-                    </Button>
+                    <Link href='mailto:sales@example.com'>
+                        <Button
+                            colorScheme='gray'
+                            size='lg'
+                            mt={4}>
+                            Contact Sales
+                        </Button>
+                    </Link>
                 </Container>
             </Box>
 
@@ -241,6 +244,7 @@ function Feature({ title, description }: { title: string; description: string })
 function PricingCard({ title, price, features }: { title: string; price: string; features: string[] }) {
     return (
         <Box
+            bg={'white'}
             borderWidth={1}
             borderRadius={'lg'}
             overflow={'hidden'}
@@ -263,12 +267,6 @@ function PricingCard({ title, price, features }: { title: string; price: string;
                     <Text key={index}>{feature}</Text>
                 ))}
             </Stack>
-            <Button
-                mt={6}
-                colorScheme='teal'
-                size='md'>
-                Select
-            </Button>
         </Box>
     );
 }
