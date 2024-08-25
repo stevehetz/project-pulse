@@ -34,10 +34,15 @@ cd projectpulse
    npm install
 ```
 
-3.      Run dev server
+3.          Run dev server
 
 ```bash
    npm run dev
 ```
 
 Open http://localhost:3000 in your browser to view the application.
+
+# Vercel Hosting
+
+1. Create a .env.dev file with the DATABASE_URL pointing to the postgres server.
+    1. This is used for setting up the postgres database in vercel.
