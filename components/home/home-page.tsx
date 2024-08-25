@@ -183,7 +183,7 @@ export default function HomePage() {
 
             {/* CTA Banner */}
             <Box
-                bg={'teal.500'}
+                bg={'#5959c2'}
                 py={10}
                 textAlign={'center'}>
                 <Container maxW={'6xl'}>
@@ -194,7 +194,7 @@ export default function HomePage() {
                         Start Your Free Trial Today!
                     </Heading>
                     <Button
-                        colorScheme='teal'
+                        colorScheme='gray'
                         size='lg'
                         mt={4}>
                         Sign Up Now
