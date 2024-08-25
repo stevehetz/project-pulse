@@ -1,12 +1,87 @@
 'use client';
 
+import {
+    Badge,
+    Box,
+    Button,
+    Drawer,
+    DrawerBody,
+    DrawerCloseButton,
+    DrawerContent,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerOverlay,
+    Flex,
+    Heading,
+    HStack,
+    Select,
+    Text,
+    Textarea,
+    useDisclosure,
+    VStack
+} from '@chakra-ui/react';
 import { DragDropContext, Draggable, Droppable } from '@hello-pangea/dnd';
-import { Badge, Box, Button, Flex, Heading, HStack, Text, VStack } from '@chakra-ui/react';
-import { FaComments, FaPaperclip, FaPlus } from 'react-icons/fa';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { FaPlus } from 'react-icons/fa';
 
-export const KanbanPage = ({ columns }) => {
+export const KanbanPage = ({ columns, users }) => {
     const [kanbanColumns, setKanbanColumns] = useState(columns);
+    const [isEditing, setIsEditing] = useState(false);
+    const { isOpen, onOpen, onClose } = useDisclosure();
+    const firstField = useRef<any>(null);
+
+    const [newTask, setNewTask] = useState<any>({});
+
+    const resetNewTaskState = (task: any = null) => {
+        console.log(task);
+        setNewTask({
+            content: '',
+            priority: 'Medium',
+            columnId: kanbanColumns[0]?.id || 0,
+            ...task,
+            assignedUsers: task.assignedUsers?.length > 0 ? task.assignedUsers : []
+        });
+    };
+
+    const getUserInitials = user => {
+        if (!user || !user.name) return 'U';
+        const { name } = user;
+        return name
+            .split(' ')
+            .map(n => n[0])
+            .join('')
+            .toUpperCase();
+    };
+
+    const handleInputChange = e => {
+        const { name, value, files } = e.target;
+        setNewTask({ ...newTask, [name]: value });
+    };
+
+    const handleAddTask = () => {
+        const updatedColumns = kanbanColumns.map(col => {
+            if (col.id === parseInt(newTask.columnId)) {
+                return {
+                    ...col,
+                    tasks: isEditing
+                        ? col.tasks.map(task => (task.id === newTask.id ? { ...newTask } : task))
+                        : [
+                              ...col.tasks,
+                              {
+                                  ...newTask,
+                                  id: Date.now(),
+                                  attachment: newTask.attachment
+                              }
+                          ]
+                };
+            }
+            return col;
+        });
+
+        setKanbanColumns(updatedColumns);
+        onClose();
+        setIsEditing(false);
+    };
 
     const onDragEnd = result => {
         const { destination, source } = result;
@@ -52,43 +127,73 @@ export const KanbanPage = ({ columns }) => {
         setKanbanColumns(newColumns);
     };
 
-    const renderTask = task => (
-        <Box
-            p={4}
-            bg='white'
-            borderRadius='md'
-            boxShadow='sm'
-            mb={4}
-            border='1px solid'
-            borderLeft='6px solid'
-            borderColor={
-                task.priority === 'High' ? 'red.500' : task.priority === 'Medium' ? 'yellow.500' : 'green.500'
-            }>
-            <Text
-                fontSize='md'
-                fontWeight='semibold'>
-                {task.content}
-            </Text>
-            <Flex mt={2}>
-                <HStack spacing={4}>
-                    <Badge
-                        colorScheme={
-                            task.priority === 'High' ? 'red' : task.priority === 'Medium' ? 'yellow' : 'green'
-                        }>
-                        {task.priority} Priority
-                    </Badge>
-                    <HStack spacing={1}>
-                        <FaComments />
-                        <Text fontSize='sm'>{task.comments}</Text>
+    const renderTask = task => {
+        const assignedUser = task.assignedUsers[0];
+
+        return (
+            <Box
+                p={4}
+                bg='white'
+                borderRadius='md'
+                boxShadow='sm'
+                mb={4}
+                border='1px solid'
+                borderLeft='6px solid'
+                borderColor={
+                    task.priority === 'High'
+                        ? 'red.500'
+                        : task.priority === 'Medium'
+                          ? 'yellow.500'
+                          : 'green.500'
+                }
+                onClick={() => {
+                    resetNewTaskState(task);
+                    setIsEditing(true);
+                    onOpen();
+                }}
+                cursor='pointer'>
+                <Text
+                    fontSize='md'
+                    fontWeight='semibold'>
+                    {task.content}
+                </Text>
+                <Flex
+                    mt={2}
+                    justifyContent='space-between'>
+                    <HStack spacing={4}>
+                        <Badge
+                            colorScheme={
+                                task.priority === 'High'
+                                    ? 'red'
+                                    : task.priority === 'Medium'
+                                      ? 'yellow'
+                                      : 'green'
+                            }>
+                            {task.priority} Priority
+                        </Badge>
                     </HStack>
-                    <HStack spacing={1}>
-                        <FaPaperclip />
-                        <Text fontSize='sm'>{task.attachments}</Text>
+                    <HStack spacing={2}>
+                        {assignedUser && (
+                            <Box
+                                key={assignedUser.user?.id}
+                                w='32px'
+                                h='32px'
+                                bg='blue.400'
+                                color='white'
+                                borderRadius='full'
+                                display='flex'
+                                alignItems='center'
+                                justifyContent='center'
+                                fontSize='sm'
+                                fontWeight='bold'>
+                                {getUserInitials(assignedUser.user)}
+                            </Box>
+                        )}
                     </HStack>
-                </HStack>
-            </Flex>
-        </Box>
-    );
+                </Flex>
+            </Box>
+        );
+    };
 
     const renderColumn = column => (
         <Droppable
@@ -135,7 +240,12 @@ export const KanbanPage = ({ columns }) => {
                         leftIcon={<FaPlus />}
                         colorScheme='teal'
                         variant='ghost'
-                        size='sm'>
+                        size='sm'
+                        onClick={() => {
+                            resetNewTaskState({ columnId: column.id });
+                            setIsEditing(false);
+                            onOpen();
+                        }}>
                         Add task
                     </Button>
                 </VStack>
@@ -144,13 +254,108 @@ export const KanbanPage = ({ columns }) => {
     );
 
     return (
-        <DragDropContext onDragEnd={onDragEnd}>
-            <Box
-                p={8}
-                minH='100vh'
-                minW={1000}>
-                <Flex justifyContent='space-between'>{kanbanColumns.map(renderColumn)}</Flex>
-            </Box>
-        </DragDropContext>
+        <>
+            <DragDropContext onDragEnd={onDragEnd}>
+                <Box
+                    p={8}
+                    minH='100vh'
+                    minW={1000}>
+                    <Flex justifyContent='space-between'>{kanbanColumns.map(renderColumn)}</Flex>
+                </Box>
+            </DragDropContext>
+
+            <Drawer
+                isOpen={isOpen}
+                placement='right'
+                initialFocusRef={firstField}
+                onClose={onClose}>
+                <DrawerOverlay />
+                <DrawerContent>
+                    <DrawerCloseButton />
+                    <DrawerHeader>Add a new task</DrawerHeader>
+
+                    <DrawerBody>
+                        <VStack spacing={4}>
+                            <Box w='100%'>
+                                <Text
+                                    mb={1}
+                                    fontWeight='medium'>
+                                    Task Content
+                                </Text>
+                                <Textarea
+                                    ref={firstField}
+                                    placeholder='Task Content'
+                                    name='content'
+                                    value={newTask.content}
+                                    onChange={handleInputChange}
+                                    resize='vertical'
+                                />
+                            </Box>
+
+                            <Box w='100%'>
+                                <Text
+                                    mb={1}
+                                    fontWeight='medium'>
+                                    Priority
+                                </Text>
+                                <Select
+                                    placeholder='Select priority'
+                                    name='priority'
+                                    value={newTask.priority}
+                                    onChange={handleInputChange}>
+                                    <option value='High'>High</option>
+                                    <option value='Medium'>Medium</option>
+                                    <option value='Low'>Low</option>
+                                </Select>
+                            </Box>
+
+                            <Box w='100%'>
+                                <Text
+                                    mb={1}
+                                    fontWeight='medium'>
+                                    Assign Users
+                                </Text>
+                                <Select
+                                    placeholder='Select users'
+                                    name='assignedUsers'
+                                    value={newTask?.assignedUsers ? newTask?.assignedUsers[0]?.user?.id : ''}
+                                    onChange={e => {
+                                        const selectedUser = users.find(
+                                            user => user.id === parseInt(e.target.value)
+                                        );
+                                        setNewTask(prevTask => ({
+                                            ...prevTask,
+                                            assignedUsers: selectedUser ? [{ user: selectedUser }] : []
+                                        }));
+                                    }}>
+                                    {users.map(user => (
+                                        <option
+                                            key={user.id}
+                                            value={user.id}>
+                                            {user.name}
+                                        </option>
+                                    ))}
+                                </Select>
+                            </Box>
+                        </VStack>
+                    </DrawerBody>
+
+                    <DrawerFooter>
+                        <Button
+                            variant='outline'
+                            mr={3}
+                            onClick={onClose}>
+                            Cancel
+                        </Button>
+                        <Button
+                            colorScheme='blue'
+                            onClick={handleAddTask}
+                            isDisabled={!newTask.content}>
+                            Save
+                        </Button>
+                    </DrawerFooter>
+                </DrawerContent>
+            </Drawer>
+        </>
     );
 };

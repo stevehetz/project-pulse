@@ -18,10 +18,17 @@ const getKanbanData = async () => {
         }
     });
 
-    return columns;
+    const users = await prisma.user.findMany();
+
+    return { columns, users };
 };
 
 export default async function Page() {
-    const columns = await getKanbanData();
-    return <KanbanPage columns={columns} />;
+    const { columns, users } = await getKanbanData();
+    return (
+        <KanbanPage
+            columns={columns}
+            users={users}
+        />
+    );
 }
