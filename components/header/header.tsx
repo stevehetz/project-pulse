@@ -25,8 +25,7 @@ export const Header = ({ onToggle }) => {
             borderColor='gray.200'
             px='4'
             py='1'
-            boxShadow='sm' // Add a subtle shadow to the header
-        >
+            boxShadow='sm'>
             <HStack spacing={2}>
                 {mounted && isMobile && (
                     <IconButton
@@ -42,7 +41,7 @@ export const Header = ({ onToggle }) => {
                     <HStack
                         alignItems='center'
                         spacing={2}>
-                        <FaProjectDiagram size={24} /> {/* ProjectPulse Icon */}
+                        <FaProjectDiagram size={24} />
                         <Text
                             marginLeft='8px'
                             fontWeight='bold'

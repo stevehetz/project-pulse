@@ -148,8 +148,8 @@ export const GanttChartPage = () => {
         ]
     ];
 
-    const trackHeight = 40; // The height of each row
-    const paddingHeight = 50; // Additional height for padding (header, footer, etc.)
+    const trackHeight = 40;
+    const paddingHeight = 50;
 
     // Calculate chart height dynamically based on the number of tasks
     const chartHeight = data.length * trackHeight + paddingHeight;
@@ -158,15 +158,15 @@ export const GanttChartPage = () => {
         height: chartHeight,
         gantt: {
             trackHeight: 40,
-            criticalPathEnabled: false, // Enables or disables critical path
+            criticalPathEnabled: false,
             innerGridHorizLine: {
-                stroke: '#e0e0e0', // Line color of the inner grid
-                strokeWidth: 1 // Line width of the inner grid
+                stroke: '#e0e0e0',
+                strokeWidth: 1
             },
             labelStyle: {
-                fontName: 'Arial', // Font family
-                fontSize: 16, // Font size
-                color: '#000' // Font color
+                fontName: 'Arial',
+                fontSize: 16,
+                color: '#000'
             }
         }
     };

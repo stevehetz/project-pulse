@@ -53,8 +53,7 @@ export const Nav = ({ isOpen, onClose }) => {
                         pointerEvents={isActive ? 'none' : 'auto'}
                         cursor={isActive ? 'default' : 'pointer'}
                         _hover={{ bg: !isActive && 'gray.100' }}
-                        onClick={onClose} // Close drawer on nav item click
-                    >
+                        onClick={onClose}>
                         <HStack spacing={3}>
                             <item.icon size={20} />
                             <Text

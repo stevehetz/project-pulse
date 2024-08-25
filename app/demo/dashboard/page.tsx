@@ -19,10 +19,9 @@ const getDashboardData = async (): Promise<DashboardProps> => {
         }
     });
 
-    const systemPerformance = await prisma.systemPerformance.findMany(); // Adjust based on your actual model name
+    const systemPerformance = await prisma.systemPerformance.findMany();
 
-    // Fetching Revenue data
-    const revenue = await prisma.revenue.findMany(); // Adjust based on your actual model name
+    const revenue = await prisma.revenue.findMany();
 
     return { metrics, userEngagement, systemPerformance, revenue };
 };
