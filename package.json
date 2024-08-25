@@ -16,7 +16,7 @@
         "vercel:db:migrate": "dotenv -e .env.dev -- npx prisma migrate dev --name",
         "vercel:db:deploy": "dotenv -e .env.dev -- npx prisma migrate deploy",
         "vercel:db:rollback": "dotenv -e .env.dev -- npx prisma migrate resolve --rolled-back",
-        "vercel:db:seed:app": "dotenv -e .env.dev -- npx prisma db seed"
+        "vercel:db:seed": "dotenv -e .env.dev -- npx prisma db seed"
     },
     "dependencies": {
         "@chakra-ui/next-js": "^2.2.0",
