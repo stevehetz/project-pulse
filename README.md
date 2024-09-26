@@ -1,5 +1,9 @@
 # ProjectPulse
 
+[Live Demo](https://projectpulse-pro.vercel.app/)
+
+## Overview
+
 ProjectPulse is a project management tool built with Next.js, Chakra UI, and chart.js. It provides an interactive and visually appealing interface for managing projects, tracking tasks, and analyzing key performance metrics.
 
 ## Features
@@ -34,7 +38,7 @@ cd projectpulse
    npm install
 ```
 
-3.              Run dev server
+3.                Run dev server
 
 ```bash
    npm run dev
