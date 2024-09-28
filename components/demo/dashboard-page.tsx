@@ -30,12 +30,20 @@ ChartJS.register(
 
 import { IconType } from 'react-icons';
 import { IRevenue, ISystemPerformance, IUserEngagement } from './types';
+import { FiDollarSign, FiUser, FiUserPlus, FiUsers } from 'react-icons/fi';
 
 interface DashboardDataState {
     userEngagement: IUserEngagement[];
     systemPerformance: ISystemPerformance[];
     revenue: IRevenue[];
 }
+
+const iconMap: { [key: string]: IconType } = {
+    FiDollarSign: FiDollarSign,
+    FiUsers: FiUsers,
+    FiUserPlus: FiUserPlus
+    // Add more icons as needed
+};
 
 export const DashboardPage = ({ metrics, userEngagement, systemPerformance, revenue }: any) => {
     const [data, setData] = useState<DashboardDataState>({
@@ -288,9 +296,10 @@ const StatCard = ({
 }: {
     title: string;
     value: string;
-    icon: IconType;
+    icon: string;
     color?: string;
 }) => {
+    const IconComponent = iconMap[icon];
     return (
         <Box
             bg='white'
@@ -299,7 +308,7 @@ const StatCard = ({
             boxShadow='sm'>
             <Flex align='center'>
                 <Box
-                    as={icon}
+                    as={IconComponent}
                     size='44px'
                     color='white'
                     bg={color || 'gray.800'}
