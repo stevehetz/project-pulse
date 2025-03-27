@@ -46,7 +46,7 @@ export const Header = ({ onToggle }) => {
                             marginLeft='8px'
                             fontWeight='bold'
                             fontSize='25px'>
-                            ProjectPulse - Testing Deploy
+                            ProjectPulse
                         </Text>
                     </HStack>
                 </Flex>
