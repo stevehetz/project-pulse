@@ -10,19 +10,19 @@ A project management dashboard built with Next.js 14, Chakra UI, and Prisma. It 
 
 KPI cards plus charts for user engagement, revenue (MRR and ARPU), churn, API response times, server uptime and revenue breakdown. Each chart is built with Chart.js through `react-chartjs-2`.
 
-![Dashboard](docs/images/dashboard.png)
+![Dashboard](docs/images/dashboard-v2.png)
 
 ### Kanban Board
 
 Backlog, In Progress, Review and Complete columns. Each task card shows a color-coded priority, its assignees and a status color. You can drag cards between columns (built with `@hello-pangea/dnd`).
 
-![Kanban board](docs/images/kanban.png)
+![Kanban board](docs/images/kanban-v2.png)
 
 ### Gantt Chart
 
 A project timeline that shows task dependencies, durations and how far along each task is. It uses Google Charts through `react-google-charts`.
 
-![Gantt chart](docs/images/gantt.png)
+![Gantt chart](docs/images/gantt-v2.png)
 
 ### Responsive Layout
 
