@@ -2,7 +2,7 @@
 
 A project management dashboard built with Next.js 14, Chakra UI, and Prisma. It has an analytics dashboard, a drag-and-drop Kanban board, and a Gantt chart timeline, all backed by a PostgreSQL database.
 
-**[Live Demo →](https://projectpulse-pro.vercel.app/)**
+**[Live Demo →](https://project-pulse-sandy-theta.vercel.app/)**
 
 ## Features
 
